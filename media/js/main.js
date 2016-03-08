@@ -1,9 +1,3 @@
-//HELP FROM HERE...
-//https://forrst.com/posts/Using_the_Instagram_API-ti5
-
-// small = + data.data[i].images.thumbnail.url +
-// resolution: low_resolution, thumbnail, standard_resolution
-
 var tag = "t1sxsw";
 var nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?client_id=ef1f56fbb5fd4f91a8c18e81bdc9ab3b";
 
