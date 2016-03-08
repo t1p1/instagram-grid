@@ -7,7 +7,7 @@
 var tag = "t1sxsw";
 var nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?client_id=ef1f56fbb5fd4f91a8c18e81bdc9ab3b";
 
-var originalImageSize = 300;
+var originalImageSize = 280;
 var globalAnimationSpeed = 5000;
 var screenWidth;
 var screenHeight;
