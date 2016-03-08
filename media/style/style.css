@@ -17,7 +17,7 @@ float: left;
 
 .grid-sizer,
 .grid-item {
-  width: 33.333%;
+  width: 300px;
 }
 
 .grid-item {
@@ -122,7 +122,7 @@ body
     margin: 0px;
     padding: 0px;
     font-size: 128px;
-    text-align: center;
+    text-align: left;
     color: white;
     font-family: "helvetica";
     text-shadow: 5px 5px 0 #000000;

@@ -52,8 +52,8 @@ function init()
     screenWidth = $(this).width();
     screenHeight = $(this).height();
 
-    $("#bigTag").css("height", screenHeight + "px");
-    $("#bigTag").css("line-height", screenHeight + "px");
+    $("#bigTag").css("height", screenHeight * 1.9 + "px");
+    $("#bigTag").css("line-height", screenHeight * 1.9 + "px");
     $("#bigTag").text("#" + tag);
 
 
