@@ -5,7 +5,7 @@
 // resolution: low_resolution, thumbnail, standard_resolution
 
 var tag = "t1sxsw";
-var nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?client_id=ef1f56fbb5fd4f91a8c18e81bdc9ab3b";
+var nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?access_token=6247429.3a0e4f5.fa826994d5fc414b88685dba7c21f9fc";
 
 var originalImageSize = 250;
 var globalAnimationSpeed = 5000;
@@ -101,17 +101,18 @@ function loadImages()
         url: nextUrl,
         success: function(data) 
         {
-            // console.log("got the data back");
+             console.log("got the data back");
+             console.log(data);
 
             if (data.pagination.next_url) 
             {
-                // console.log("next_url exists");
+                 console.log("next_url exists");
                 nextUrl = data.pagination.next_url;
             }
             else
             {
-                // console.log("next_url does not exist");
-                nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?client_id=cabf3ee14f114c5f9431ed9aa70e71ce";
+                 console.log("next_url does not exist");
+                nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?access_token=6247429.3a0e4f5.fa826994d5fc414b88685dba7c21f9fc";
 
             }
 
@@ -225,7 +226,7 @@ function refreshDisplay()
             else
             {
                 // console.log("next_url does not exist");
-                nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?client_id=cabf3ee14f114c5f9431ed9aa70e71ce";
+                nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?access_token=6247429.3a0e4f5.fa826994d5fc414b88685dba7c21f9fc";
 
             }
 
@@ -284,7 +285,7 @@ function submitForm()
     originalImageSize = $("#gridSizeField").val();
     globalAnimationSpeed = $("#animationSpeedField").val();
     fullScreenTransitionSpeed = $("#fullScreenTransitionField").val();
-    nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?client_id=cabf3ee14f114c5f9431ed9aa70e71ce";
+    nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?access_token=6247429.3a0e4f5.fa826994d5fc414b88685dba7c21f9fc";
     //$(".instagramGrid").empty();
     
     clearInterval(resetInterval);
