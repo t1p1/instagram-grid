@@ -1,3 +1,6 @@
+
+console.log(Instafeed);
+
 //HELP FROM HERE...
 //https://forrst.com/posts/Using_the_Instagram_API-ti5
 
@@ -5,7 +8,7 @@
 // resolution: low_resolution, thumbnail, standard_resolution
 
 var tag = "t1sxsw";
-var nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?client_id=ef1f56fbb5fd4f91a8c18e81bdc9ab3b";
+var nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?access_token=4756987015.5d4c291.129cdb264a0948619f9fd12cf18fdc10";
 var twitterUrl = "twitter.php?search=%23" + 'dogs';
 
 var originalImageSize = 250;
@@ -87,9 +90,11 @@ function init()
         }
     }
 
-    loadTwitter();
+    // loadTwitter();
 
-    // loadImages();
+    loadImages();
+    
+    // loadImagesNew();
 
 
 }
@@ -156,6 +161,18 @@ function loadImages()
         }
     });
 }
+
+
+// function loadImagesNew(){
+//     var feed = new Instafeed({
+//         get: 'tagged',
+//         tagName: 'dogs',
+//         clientId: 'ef1f56fbb5fd4f91a8c18e81bdc9ab3b'
+//         accessToken: '4756987015.5d4c291.129cdb264a0948619f9fd12cf18fdc10'
+//     });
+//     feed.run();
+// }
+
 
 function slideIn(ref, delay, time)
 {
