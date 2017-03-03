@@ -5,7 +5,8 @@
 // resolution: low_resolution, thumbnail, standard_resolution
 
 var tag = "t1sxsw";
-var nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?access_token=6247429.3a0e4f5.fa826994d5fc414b88685dba7c21f9fc";
+var nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?client_id=ef1f56fbb5fd4f91a8c18e81bdc9ab3b";
+var twitterUrl = "twitter.php?search=%23" + 'dogs';
 
 var originalImageSize = 250;
 var globalAnimationSpeed = 5000;
@@ -86,7 +87,11 @@ function init()
         }
     }
 
-    loadImages();
+    loadTwitter();
+
+    // loadImages();
+
+
 }
 
 
@@ -101,18 +106,17 @@ function loadImages()
         url: nextUrl,
         success: function(data) 
         {
-             console.log("got the data back");
-             console.log(data);
+            // console.log("got the data back");
 
             if (data.pagination.next_url) 
             {
-                 console.log("next_url exists");
+                // console.log("next_url exists");
                 nextUrl = data.pagination.next_url;
             }
             else
             {
-                 console.log("next_url does not exist");
-                nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?access_token=6247429.3a0e4f5.fa826994d5fc414b88685dba7c21f9fc";
+                // console.log("next_url does not exist");
+                nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?client_id=cabf3ee14f114c5f9431ed9aa70e71ce";
 
             }
 
@@ -122,7 +126,7 @@ function loadImages()
             {
                 if (data.data[i])
                 {
-                    $("#image"+currentIndex).html("<div class='instagramImageHolder'><a target='_blank' href='" + data.data[i].link +"'><img class='instagramImage' src='" + data.data[i].images.low_resolution.url +"' /></a></div>");
+                    $("#image"+currentIndex).html("<div class='tile imageTile instagramImageHolder'><a target='_blank' href='" + data.data[i].link +"'><img class='instagramImage' src='" + data.data[i].images.low_resolution.url +"' /></a></div>");
 
                     $("#image"+currentIndex).hide();
                     var rand = Math.random()*1000;
@@ -226,7 +230,7 @@ function refreshDisplay()
             else
             {
                 // console.log("next_url does not exist");
-                nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?access_token=6247429.3a0e4f5.fa826994d5fc414b88685dba7c21f9fc";
+                nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?client_id=cabf3ee14f114c5f9431ed9aa70e71ce";
 
             }
 
@@ -268,7 +272,7 @@ function swapImage(params)
         $(params.divRef + " > .animationObject").hide();
         $(params.divRef + " > .animationObject").fadeIn(1000, function()
         {
-            $(params.divRef).html("<div class='instagramImageHolder'><a target='_blank' href='" + params.dataLink +"'><img class='instagramImage' src='" + params.dataUrl +"' /></a></div>");
+            $(params.divRef).html("<div class='tile instagramImageHolder'><a target='_blank' href='" + params.dataLink +"'><img class='instagramImage' src='" + params.dataUrl +"' /></a></div>");
             indexIsAnimating[params.randIndex] = false;
         });
     }
@@ -285,7 +289,7 @@ function submitForm()
     originalImageSize = $("#gridSizeField").val();
     globalAnimationSpeed = $("#animationSpeedField").val();
     fullScreenTransitionSpeed = $("#fullScreenTransitionField").val();
-    nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?access_token=6247429.3a0e4f5.fa826994d5fc414b88685dba7c21f9fc";
+    nextUrl = "https://api.instagram.com/v1/tags/" + tag + "/media/recent?client_id=cabf3ee14f114c5f9431ed9aa70e71ce";
     //$(".instagramGrid").empty();
     
     clearInterval(resetInterval);
@@ -346,6 +350,64 @@ function doFullScreenTransition()
 
 
 
+
+}
+
+
+
+
+function loadTwitter()
+{
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        cache: false,
+        url: twitterUrl,
+        success: function(data) 
+        {
+             console.log('twitter data: ',data);
+            
+
+            for (var i = 0; i < data.statuses.length; i++) 
+            {
+                
+                var tweetObj = data.statuses[i];
+                console.log(tweetObj);
+                if(tweetObj.entities.media && (tweetObj.entities.media.length > 0)){
+                    $("#image"+currentIndex).html('<div class="tile imageTile instagramImageHolder"><a target="_blank" href="' + tweetObj.entities.media[0].display_url +'"><img class="instagramImage" src="' + tweetObj.entities.media[0].media_url +'" /></a></div>');
+                }
+
+                else{
+                    var url = 'https://twitter.com/'+tweetObj.user.screen_name+'/status/'+tweetObj.id_str;
+                    var profileUrl = 'https://twitter.com/'+tweetObj.user.screen_name;
+                    $("#image"+currentIndex).html('<div class="tile textTile twitterTile"><a target="_blank" href="' + profileUrl +'"><div class="twitter-profile"><img class="twitter-pic" src="'+tweetObj.user.profile_image_url+'" /><span class="twitter-name"><strong>'+tweetObj.user.name+'</strong></span></div><p class="text">'+tweetObj.text+'</p></a></div>');
+                }
+
+                $("#image"+currentIndex).hide();
+                var rand = Math.random()*1000;
+                $("#image"+currentIndex).delay(i*100);
+                $("#image"+currentIndex).fadeIn();
+
+                //var ref = "#image" + currentIndex + "> .instagramImageHolder";
+                //slideIn(ref, i*100, 1000);
+
+
+                // allUrls[currentIndex] = data.data[i].images.low_resolution.url;
+                // allLinks[currentIndex] = data.data[i].link;
+                currentIndex++;
+            }  
+
+            // if (currentIndex < numItems)
+            // {
+            //     loadImages();
+            // }
+            // else
+            // {
+            //     resetInterval = setInterval(doItAgain, globalAnimationSpeed);
+            //     fullScreenTransitionInterval = setInterval(doFullScreenTransition, fullScreenTransitionSpeed);
+            // }
+        }
+    });
 
 }
 

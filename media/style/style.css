@@ -128,3 +128,32 @@ body
     text-shadow: 5px 5px 0 #000000;
     z-index: 9;
 }
+
+
+.textTile{
+    color: #fff;
+    background-color: #000;
+    padding: 10px 10px 10px 68px;
+}
+
+.textTile > a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.twitter-profile{
+    color: #fff;
+    text-decoration: none;
+}
+
+.twitter-profile .twitter-pic{
+    float: left;
+    margin-top: 3px;
+    margin-left: -58px;
+    border-radius: 5px;
+    border: 0;
+}
+
+.twitter-profile .twitter-name{
+    font-weight: bold;
+}
