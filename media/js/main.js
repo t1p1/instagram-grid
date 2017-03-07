@@ -70,7 +70,7 @@ function init()
 
 var initLoad = function(data){
     var renderList = curateList(data);
-    console.log('renderList: ',renderList);
+    // console.log('renderList: ',renderList);
 
     //make sure renderList is never more than numItems
     var cont = true;
@@ -232,7 +232,7 @@ function generateTiles(data, start){
 
 
 function generateTile(data, index){
-    console.log('this: ',$tiles.filter("#image"+index));
+    // console.log('this: ',$tiles.filter("#image"+index));
     var $tile = $tiles.filter("#image"+index)
     var tileHtml = '<div class="tile imageTile instagramImageHolder"><a target="_blank" href="' + data.link +'"><img class="instagramImage" src="' + data.images.low_resolution.url +'" /></a></div>';
     $tile.html(tileHtml).hide().fadeIn();
