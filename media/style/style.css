@@ -117,8 +117,8 @@ body
 {
     display: inline-block;
     position: fixed;
-    left: calc(50% - 250px);
-    top: calc(50% - 70px);
+    left: calc(50vw - 250px);
+    top: calc(50vh - 70px);
     width: 500px;
     height: 140px;
     line-height: 140px;
