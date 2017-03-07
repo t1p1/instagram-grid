@@ -301,10 +301,24 @@ function curateList(data){
         tagItems = tagItems.concat(nonTagItems);
         allTiles = allTiles.concat(nonTagItems);
     }
+
+    cleanSavedImages();
     
 
     return tagItems;
 
+}
+
+
+function cleanSavedImages(){
+    if(allTiles.length > (numItems * 2) ){
+        var cont = true;
+        while(cont){
+            if(allTiles.length > (numItems * 2) ){
+                allTiles.shift();
+            }
+        }
+    }
 }
 
 
